@@ -7,7 +7,7 @@
 #include "MyCharacter.generated.h"
 
 UCLASS()
-class ONLINE_STUDY_API AMyCharacter : public AOnline_StudyCharacter
+class ONLINE_STUDY_API AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -18,6 +18,12 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	class USpringArmComponent* CameraBoom;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	class UCameraComponent* FollowCamera;
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

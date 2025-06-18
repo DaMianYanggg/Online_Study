@@ -6,9 +6,11 @@
 #include "Engine/Engine.h"
 #include "MyProjectile.h"
 #include "TimerManager.h"
+#include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "UObject/ConstructorHelpers.h"
+#include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -19,6 +21,12 @@ AMyCharacter::AMyCharacter()
 	//初始化玩家生命值
 	MaxHealth = 100.0f;
 	CurrentHealth = MaxHealth;
+
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+	CameraBoom->SetupAttachment(RootComponent);
+
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+	FollowCamera->SetupAttachment(CameraBoom);
 
 	//初始化投射物类
 	ProjectileClass = AMyProjectile::StaticClass();
